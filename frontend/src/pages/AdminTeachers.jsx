@@ -36,7 +36,21 @@ export default function AdminTeachers() {
     };
 
     useEffect(() => {
-        void load();
+        let cancelled = false;
+        async function loadInitialData() {
+            try {
+                const [teacherData, studentData] = await Promise.all([getTeachers(), getStudents()]);
+                if (cancelled) return;
+                setTeachers(Array.isArray(teacherData) ? teacherData : []);
+                setStudents(Array.isArray(studentData) ? studentData : []);
+            } catch (err) {
+                if (!cancelled) setError(err.message);
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        }
+        void loadInitialData();
+        return () => { cancelled = true; };
     }, []);
 
     function handleChange(e) {

@@ -40,7 +40,24 @@ export default function Events() {
     }
   }
 
-  useEffect(() => { void loadEvents(); }, []);
+  useEffect(() => {
+    let cancelled = false;
+    async function loadInitialEvents() {
+      try {
+        const data = await getEvents();
+        const teacherData = role === "Admin" ? await getTeachers() : [];
+        if (cancelled) return;
+        setEvents(Array.isArray(data) ? data : []);
+        setTeachers(Array.isArray(teacherData) ? teacherData : []);
+      } catch (err) {
+        if (!cancelled) setError(err.message);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    void loadInitialEvents();
+    return () => { cancelled = true; };
+  }, [role]);
 
   function toggleDepartment(value) {
     setForm((current) => ({

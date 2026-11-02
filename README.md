@@ -22,6 +22,7 @@ The API enforces the role and department rules. Frontend route guards only contr
 ## Deployment configuration
 
 - Set `VITE_API_BASE_URL` at frontend build time to the API base URL including `/api` (for example, `https://api.example.edu/api`). Leave it unset when the frontend and API share an origin and `/api` is routed to the API.
+- For local development, set `BACKEND_URL` in `frontend/.env` to the API origin (for example, `http://localhost:5297`). Vite forwards all `/api` requests to this URL; restart Vite after changing it.
 - Set ASP.NET `Frontend:Origin` to the exact deployed frontend origin when the API is hosted on a different origin.
 - Configure `ConnectionStrings__DefaultConnection`, `Jwt__Key`, `Jwt__Issuer`, `Jwt__Audience`, `SeedAdmin__Email`, and `SeedAdmin__Password` through the deployment secret store. Do not use development credentials for deployment.
 

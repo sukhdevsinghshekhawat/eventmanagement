@@ -24,7 +24,19 @@ export default function Applications() {
     };
 
     useEffect(() => {
-        void load();
+        let cancelled = false;
+        async function loadInitialApplications() {
+            try {
+                const data = await getAllApplications();
+                if (!cancelled) setApplications(Array.isArray(data) ? data : []);
+            } catch (err) {
+                if (!cancelled) setError(err.message);
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        }
+        void loadInitialApplications();
+        return () => { cancelled = true; };
     }, []);
 
     const statusToEnum = { Approved: 1, Rejected: 2 };

@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { getToken, getUserRole, getUserFullName, getUserDepartment, logoutUser } from "../api/auth";
+import { getUserRole, getUserFullName, getUserDepartment, logoutUser } from "../api/auth";
 
 export default function Navbar() {
     const navigate = useNavigate();
