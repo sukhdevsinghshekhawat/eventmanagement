@@ -1,0 +1,119 @@
+@model IEnumerable<MyMvcApp.Models.Student>
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<form asp-controller="Student" asp-action="Index" method="get" class="mb-3">
+    <div class="row g-2">
+        <div class="col-md-4">
+            <input type="text" name="searchString" value="@ViewBag.SearchString" class="form-control"
+                   placeholder="Search by name or email..." />
+        </div>
+        <div class="col-md-3">
+            <input type="text" name="name" value="@ViewBag.Name" class="form-control" placeholder="Search by name..." />
+        </div>
+
+        <div class="col-md-3">
+            <select name="course" class="form-select">
+                <option value="">All Courses</option>
+                <option value="MCA" selected="@(ViewBag.Course == "MCA")">MCA</option>
+                <option value="BCA" selected="@(ViewBag.Course == "BCA")">BCA</option>
+                <option value="BSc" selected="@(ViewBag.Course == "BSc")">BSc</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a asp-action="Index" class="btn btn-secondary">Reset</a>
+        </div>
+    </div>
+</form>
+
+
+<div class="container mt-4">
+    <h1>Student List</h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Course</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.Id</td>
+                    <td>@student.Name</td>
+                    <td>@student.Email</td>
+                    <td>@student.Course</td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+
+                        <form asp-action="Delete" asp-route-id="@student.Id" method="post" style="display:inline">
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Delete this student?')">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a asp-controller="Student" asp-action="Create" class="btn btn-success mb-3">
+    + Add Student
+</a>
+
+<form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+    <button type="submit" class="btn btn-danger">Logout</button>
+</form>
+
+
+@{
+    int currentPage = ViewBag.CurrentPage;
+    int totalPages = ViewBag.TotalPages;
+}
+
+@if (totalPages > 1)
+{
+    <nav aria-label="Student pages">
+        <ul class="pagination">
+
+            <li class="page-item @(currentPage <= 1 ? "disabled" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@(currentPage - 1)"
+                   asp-route-searchString="@ViewBag.SearchString" asp-route-course="@ViewBag.Course">
+                    Previous
+                </a>
+            </li>
+
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <li class="page-item @(i == currentPage ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-searchString="@ViewBag.SearchString"
+                       asp-route-course="@ViewBag.Course">
+                        @i
+                    </a>
+                </li>
+            }
+
+            <li class="page-item @(currentPage >= totalPages ? "disabled" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@(currentPage + 1)"
+                   asp-route-searchString="@ViewBag.SearchString" asp-route-course="@ViewBag.Course">
+                    Next
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+}
+
