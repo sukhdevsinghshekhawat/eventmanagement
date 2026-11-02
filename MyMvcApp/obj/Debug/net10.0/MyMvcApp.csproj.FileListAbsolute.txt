@@ -23,7 +23,6 @@
 /home/sukhdev/newProject/MyMvcApp/obj/Debug/net10.0/scopedcss/projectbundle/MyMvcApp.bundle.scp.css
 /home/sukhdev/newProject/MyMvcApp/obj/Debug/net10.0/compressed/mv7rr9borb-{0}-lugek5hnai-lugek5hnai.gz
 /home/sukhdev/newProject/MyMvcApp/obj/Debug/net10.0/compressed/r42dj9v3f5-{0}-61n19gt1b8-61n19gt1b8.gz
-/home/sukhdev/newProject/MyMvcApp/obj/Debug/net10.0/compressed/5vtmfkbc5c-{0}-fr7q2aak1r-fr7q2aak1r.gz
 /home/sukhdev/newProject/MyMvcApp/obj/Debug/net10.0/compressed/mz1sqfxj73-{0}-bqjiyaj88i-bqjiyaj88i.gz
 /home/sukhdev/newProject/MyMvcApp/obj/Debug/net10.0/compressed/5lcuzb0wul-{0}-c2jlpeoesf-c2jlpeoesf.gz
 /home/sukhdev/newProject/MyMvcApp/obj/Debug/net10.0/compressed/d038ci0mvy-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -214,3 +213,4 @@
 /home/sukhdev/newProject/MyMvcApp/bin/Debug/net10.0/System.IdentityModel.Tokens.Jwt.dll
 /home/sukhdev/newProject/MyMvcApp/bin/Debug/net10.0/DotNetEnv.dll
 /home/sukhdev/newProject/MyMvcApp/bin/Debug/net10.0/Superpower.dll
+/home/sukhdev/newProject/MyMvcApp/obj/Debug/net10.0/MyMvcApp.sourcelink.json
